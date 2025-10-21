@@ -192,7 +192,7 @@ export default function App() {
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
                 {photos.map((photo, index) => (
                   <div key={photo.id} onClick={() => setSelectedPhoto({ url: photo.url, title: photo.title, gallery: photos, currentIndex: index })} className="aspect-[4/3] overflow-hidden rounded-lg cursor-pointer group relative shadow-md hover:shadow-xl transition-all">
-                    <img src={photo.url} alt={photo.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={photo.url} alt={photo.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 sm:p-4"><p className="text-white font-medium text-xs sm:text-sm">{photo.title}</p></div>
                   </div>
                 ))}

@@ -4,6 +4,103 @@ import { Camera, Heart, Code, User, MapPin, Calendar, ExternalLink, X, ArrowRigh
 
 import ScrollToTop from './ScrollToTop';
 
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  // This function closes the mobile menu when a link is clicked
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* == Left Side: Logo and Brand Name == */}
+          <Link to="/" className="flex-shrink-0 flex items-center gap-3">
+            {/* Your Logo */}
+            <img 
+              className="h-11 w-11 rounded-full object-cover" 
+              src="/haonew.jpg" // The path from the public folder
+              alt="Hao's Logo" 
+            />
+            <span className="font-medium text-gray-900 tracking-wide">
+              Things Work
+            </span>
+          </Link>
+
+          {/* == Right Side: Desktop Menu (hidden on small screens) == */}
+          <div className="hidden sm:flex sm:items-center sm:gap-10">
+            <Link to="/journey" className={`capitalize transition-all duration-300 text-base ${location.pathname === '/journey' ? 'text-indigo-600 font-medium' : 'text-gray-500 hover:text-gray-900'}`}>
+              Journey
+            </Link>
+            <Link to="/" className={`capitalize transition-all duration-300 text-base ${location.pathname === '/' ? 'text-indigo-600 font-medium' : 'text-gray-500 hover:text-gray-900'}`}>
+              Projects
+            </Link>
+            <Link to="/photos" className={`capitalize transition-all duration-300 text-base ${location.pathname === '/photos' ? 'text-indigo-600 font-medium' : 'text-gray-500 hover:text-gray-900'}`}>
+              Photos
+            </Link>
+          </div>
+          
+          {/* == Hamburger Button (visible on small screens) == */}
+          <div className="sm:hidden flex items-center">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              type="button"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open main menu</span>
+              {/* Icon when menu is closed. */}
+              {!isOpen ? (
+                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              ) : (
+                // Icon when menu is open.
+                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* == Mobile Menu Dropdown (conditionally rendered) == */}
+      {isOpen && (
+        <div className="sm:hidden border-t border-gray-200" id="mobile-menu">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            <Link 
+              to="/journey" 
+              onClick={closeMenu}
+              className={`block px-3 py-2 rounded-md text-base font-medium ${location.pathname === '/journey' ? 'bg-indigo-50 text-indigo-700' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'}`}
+            >
+              Journey
+            </Link>
+            <Link 
+              to="/" 
+              onClick={closeMenu}
+              className={`block px-3 py-2 rounded-md text-base font-medium ${location.pathname === '/' ? 'bg-indigo-50 text-indigo-700' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'}`}
+            >
+              Projects
+            </Link>
+            <Link 
+              to="/photos" 
+              onClick={closeMenu}
+              className={`block px-3 py-2 rounded-md text-base font-medium ${location.pathname === '/photos' ? 'bg-indigo-50 text-indigo-700' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'}`}
+            >
+              Photos
+            </Link>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+};
+
 export default function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -113,26 +210,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <span className="font-medium text-gray-900 tracking-wide">⚙️ Hao Things Work</span>
-            </div>
-            <div className="flex gap-6 sm:gap-10">
-              <Link to="/journey" className={`capitalize transition-all duration-300 text-sm sm:text-base ${location.pathname === '/journey' ? 'text-indigo-600 font-medium' : 'text-gray-500 hover:text-gray-900'}`}>
-                Journey
-              </Link>
-              <Link to="/" className={`capitalize transition-all duration-300 text-sm sm:text-base ${location.pathname === '/' ? 'text-indigo-600 font-medium' : 'text-gray-500 hover:text-gray-900'}`}>
-                Projects
-              </Link>
-              <Link to="/photos" className={`capitalize transition-all duration-300 text-sm sm:text-base ${location.pathname === '/photos' ? 'text-indigo-600 font-medium' : 'text-gray-500 hover:text-gray-900'}`}>
-                Photos
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       <ScrollToTop /> 
 

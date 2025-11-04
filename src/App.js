@@ -282,6 +282,8 @@ export default function App() {
         </Routes>
       </div>
 
+      <Analytics />
+
       {selectedProject && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 overflow-y-auto animate-fadeIn" onClick={() => setSelectedProject(null)}>
           <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">

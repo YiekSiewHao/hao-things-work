@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { Camera, Heart, Code, User, MapPin, Calendar, ExternalLink, X, ArrowRight, Mail, Github, Linkedin, Sparkles } from 'lucide-react';
+import { Analytics } from "@vercel/analytics/react"
 
 import ScrollToTop from './ScrollToTop';
 
